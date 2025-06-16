@@ -1,0 +1,102 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Siraj Ahmed</title>
+</head>
+<body>
+
+	<div id="header">
+
+		<h2 id="hour">0</h2>
+		<h2 id="minute">0</h2>
+		<h2 id="second">0</h2>
+
+
+
+		<button onClick="StartClock()">Start Clock</button>
+		<button onClick="StopClock()">Stop Clock</button>
+
+
+	</div>
+
+	<script> -->
+
+//      setInterval(anim, 1000);
+
+//      function anim() {
+//     console.log("Hello");
+// }
+
+
+	// 	let IntervalId;
+    // function CountNumber() {
+
+    	
+
+         
+    // 	IntervalId = setInterval(() =>{
+    // 		var a = parseInt(document.getElementById("count").innerText);
+
+    //      a += 1;
+    //      document.getElementById("count").innerText = a;
+
+    // 	} , 1000)
+
+    	// setInterval()
+        // var a = parseInt(document.getElementById("count").innerText);
+
+        // a += 1;
+        // document.getElementById("count").innerText = a;
+    // }
+<!-- </script>
+
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Digital Clock</title>
+</head>
+<body>
+
+<div id="header">
+	<h2 id="hour">0</h2>
+	<h2 id="minute">0</h2>
+	<h2 id="second">0</h2>
+
+	<button onclick="StartClock()">Start Clock</button>
+	<button onclick="StopClock()">Stop Clock</button>
+</div>
+
+<script>
+	let clockInterval;
+
+	function updateClock() {
+		const now = new Date();
+		document.getElementById("hour").innerText = String(now.getHours()).padStart(2, '0');
+		document.getElementById("minute").innerText = String(now.getMinutes()).padStart(2, '0');
+		document.getElementById("second").innerText = String(now.getSeconds()).padStart(2, '0');
+	}
+
+	function StartClock() {
+		updateClock(); // Show time immediately
+		if (!clockInterval) {
+			clockInterval = setInterval(updateClock, 1000);
+		}
+	}
+
+	function StopClock() {
+		clearInterval(clockInterval);
+		clockInterval = null;
+	}
+</script>
+
+</body>
+</html>

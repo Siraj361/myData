@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>SetTimeout</title>
+</head>
+<body>
+<center>
+	<h2 id="one">0</h2>
+	<h2 id="minutes">0</h2>
+	<h2 id="hours">0</h2>
+
+
+	<button onclick="setCount()">Count</button>
+	<button onclick="stop()">Stop</button>
+</center>
+
+	<script>
+		let interval;
+        let seconds = 0;
+        let minutes = 0;
+        let hours = 0;
+
+		function setCount()
+		{
+            
+			interval = setInterval(function(){
+			seconds +=1;
+             var a = document.getElementById("one").innerHTML = seconds;
+			
+			if( seconds == 59)
+			{
+				seconds = 0;
+				minutes +=1;
+				document.getElementById("minutes").innerHTML = minutes;
+			}
+			
+			}, 100)
+
+		}
+
+		function stop()
+		{
+
+			clearInterval(seconds);
+		}
+          // setTimeout(ani , 2000);  // Use setTimeout instead of SetTimeOut
+
+          // function ani()
+          // {
+          // 	alert("ok");
+          // }
+
+          // setInterval(ani , 2000);  // Use setTimeout instead of SetTimeOut
+
+          // function ani()
+          // {
+          // 	alert("ok");
+          // }
+
+
+		// let a =setInterval(function(){
+		// 	console.log(a);
+		// },200)
+	</script>
+
+</body>
+</html>

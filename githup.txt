@@ -1,0 +1,9 @@
+git remote add origin https://github.com/Muhammad-Juman-jarwar/leady-backend.git
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git push -u origin main
+
+
+
+https://github.com/Siraj361/leadyBackend.git

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Java Script</title>
+</head>
+<body>
+
+
+         <!--  <h2 id="num">0</h2>
+          <button onClick="myFunction()">Count Number</button> -->
+          <input type="text" id="display" disabled>
+         <button onClick="displayNumber('2')">2</button>
+         <button onClick="displayNumber('3')">3</button>
+         <button onClick="displayNumber('+')">+</button>
+         <button onClick="displayNumber('-')">-</button>
+         <button onClick="displayNumber('*')">*</button>
+
+
+         <button onClick="displayNumber('4')">4</button>
+
+         <button onClick="showResult()">=</button>
+
+
+         <script>
+                   function displayNumber(value)
+                   {
+                   	var a = document.getElementById('display').value +=value;
+
+                   	
+                   }
+
+                   function showResult()
+                   {
+                   	var b = eval(document.getElementById('display').value)
+
+                   	document.getElementById('display').value = b;
+                   }
+
+         </script>
+
+
+     
+        <!--  <div id="one" class="two" style="">
+         	
+         	<h2 id="well">Iam Working on Project</h2>
+              <ul>
+
+                    <li><a href="">Home</li>
+                    <li><a href="">Home</li>
+                    <li><a href="">Home</li>
+                    <li><a href="">Home</li>
+
+              </ul>
+         </div> -->
+
+
+         <script>
+
+         	     // setInterval(myname , 5000)
+
+         	     // function myname()
+         	     // {
+         	     // 	// alert("Your 5 Seconds Completed")
+         	     // 	// console.log("Hello")
+         	     // }
+
+
+         	     // function myFunction()
+         	     // {
+         	     // var a = 	document.getElementById("num").innerHTML;
+         	     // a = parseInt(a) + 1;
+
+         	     //  if(a == 10)
+         	     //  {
+         	     //  	alert("you won")
+         	     //  }else{
+         	     //  	 document.getElementById("num").innerHTML = a;
+         	     //  }
+         	     
+
+
+         	    // }
+
+                   // var a;
+
+                   // a = document.querySelector("#well").innerHTML ="Mit Software Solutions";
+
+                   // console.log(a);
+
+         	  //  var a ;
+
+         	  // a=  document.querySelectorAll("#one");
+         	  // console.log(a)
+
+         </script>
+
+
+</body>
+</html>

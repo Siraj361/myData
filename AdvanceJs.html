@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Advance Js </title>
+</head>
+<style>
+        .one{
+        	width: 200px;
+        	height: 200px;
+        	background-color: red;
+
+        }
+</style>
+<body>
+
+   <label>Enter Num</label>
+   <input type="text" name="" id="display" disabled>
+
+   <button  onclick="appendToDisplay('2')">2</button>
+   <button  onclick="appendToDisplay('+')">+</button>
+
+   <button  onclick="appendToDisplay('3')">3</button>
+
+   <button  onclick="result()">=</button>
+
+   
+
+
+
+   <script>
+  
+           function appendToDisplay(value)
+           {
+          document.getElementById("display").value +=value ;
+           
+           }
+
+           function result()
+           {
+            var a = eval(document.getElementById("display").value);
+
+            document.getElementById('display').value =a;
+
+            console.log(a);
+           }
+
+          
+
+   </script>
+
+        <!-- <h2 id="num">0</h2>
+     <button onclick="countNumber()">Count</button> -->
+	<div id="header" class="one" style="border:2px solid yellow">
+    
+           <h4 id="pak">Hello my name is heading four</h4>
+     </div>
+   <h2>Hello my name is heading two</h2>
+
+   <p>Hello my name is Paragraph</p>
+     <ul>
+             <li><a href="">Home</a></li>
+             <li><a href="">Home</a></li>
+             <li><a href="">Home</a></li>
+             <li><a href="">Home</a></li>
+
+
+     </ul>
+
+
+     <script>
+           // var a = 0; 
+           // var c =  setInterval(data, 1000); 
+   
+           //  function data() {
+           //      a = a + 10; 
+           //      if(a == 50)
+           //      {
+           //       clearInterval(c)
+           //      }else{
+           //      console.log(a);
+           //      } 
+           //  }
+
+
+// 
+         // function countNumber()
+         // {
+         //    var a = document.getElementById('num').innerHTML;
+
+         //    a = parseInt(a) + 1;
+         //    document.getElementById('num').innerHTML = a;
+
+         // }
+            // const a =document.getElementById("header").querySelectorAll;
+            // const a =document.getElementById("header").getAttribute('class');
+            // const a =document.getElementById("header").getAttributeNode;
+
+     	   // var a =document.getElementById("header").onmouseout = abc;
+     	   // var c =document.getElementById("header").onmouseenter = cba;
+
+              // var a = document.getElementById("header").addEventListener("click" , abc);
+
+  // var a = document.getElementById("header").addEventListener("mouseenter" , function()
+  // 	{
+  // 		var b = document.getElementById("header");
+  //          	b.style.color="yellow";
+  //          	b.style.background="green";
+  // 	});
+
+           // function cba()
+           // {
+           // 	var b = document.getElementById("header");
+           // 	b.style.color="yellow";
+           // 	b.style.background="green";
+
+           // }
+
+           //  function abc()
+           // {
+           // 	var c = document.getElementById("header");
+           // 	c.style.color="purple";
+           // 	c.style.background="blue";
+
+           // }
+
+      
+           // console.log(a)
+
+      // var a ;
+      // document.querySelector("#header").innerHTML = "Pakistan Zindabad";
+
+      // var a = document.querySelector("#header").getAttribute("class");
+
+      // console.log(a);
+
+
+//   window.onresize = function()
+// {
+//      document.querySelector("#header").innerHTML = "Pakistan Zindabad";
+
+// }     
+
+</script>
+
+</body>
+</html>

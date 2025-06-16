@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Set time</title>
+</head>
+<body>
+
+	<h2 id="num">0</h2>
+
+	<button onclick="startTime()">Start</button>
+	<button onclick="closeTime()">Close</button>
+
+
+     <script>
+              function startTime()
+              {
+              var a = 0 ;
+
+               var a =document.getElementById("num").innerHTML;
+               // a +=1;
+               a = parseInt(a) +1;
+               document.getElementById("num").innerHTML = a;
+              }
+
+              function closeTime()
+              {
+              	clearInterval(varTimeStart)
+              }
+
+     </script>
+
+</body>
+</html>
