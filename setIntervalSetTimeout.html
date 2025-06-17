@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Hello JavaScript</title>
+</head>
+<body>
+<!-- 	  setTimeout
+	  setInterval
+	  clearInterval -->
+<center>
+       <h1 id="one" onclick="countNumber()">0</h1>
+
+       <button onClick="CountNumber()">Start</button>
+       <button onClick="Stop()">Stop</button>
+
+</center>
+
+      <script>
+            let intervalId ;
+      	    function CountNumber()
+      	    {
+             
+              intervalId = setInterval(function(){
+                var b = document.getElementById("one").innerHTML;
+      	    	 b = parseInt(b) + 1;
+                 document.getElementById("one").innerHTML = b;
+              },200)
+      	    	// alert("ok");
+      	    	
+      	    }
+
+
+      	    function Stop()
+      	    {
+      	    	clearInterval(intervalId)
+      	    }
+              
+             // document.write("Makkah") 
+
+             // setInterval(function(){
+             //   console.log("ali")
+             // },5000) 
+
+      	// setInterval(anim , 2000)
+
+      	// function anim(){
+      	// 	 console.log("ali")
+      	// }
+
+      	// setTimeout(anim , 2000)
+
+      	// function anim(){
+      	// 	 console.log("ali")
+      	// }
+
+
+      </script>
+</body>
+</html>
