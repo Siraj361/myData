@@ -10,7 +10,12 @@
 	  setInterval
 	  clearInterval -->
 <center>
-       <h1 id="one" onclick="countNumber()">0</h1>
+       <h1 id="second">0</h1>
+       <h1 id="minutes">0</h1>
+       <h1 id="hours">0</h1>
+      
+
+
 
        <button onClick="CountNumber()">Start</button>
        <button onClick="Stop()">Stop</button>
@@ -19,17 +24,40 @@
 
       <script>
             let intervalId ;
+            var seconds = 0;
+            var minutes =0;
+            var hour  =0;
+
+            
       	    function CountNumber()
       	    {
-             
+
               intervalId = setInterval(function(){
-                var b = document.getElementById("one").innerHTML;
-      	    	 b = parseInt(b) + 1;
-                 document.getElementById("one").innerHTML = b;
-              },200)
+
+              seconds += 1;
+
+                 document.getElementById("second").innerHTML =seconds;
+
+               if(seconds == 59){
+                    seconds = 0;
+
+                    minutes +=1;
+                    document.getElementById("minutes").innerHTML =minutes;
+               }
+
+               else if(minutes == 59)
+               {
+                 minutes = 0;
+                 hour +=1;
+                  document.getElementById("hours").innerHTML =hour;
+    } 
+      	    	 
+              },5)
       	    	// alert("ok");
+               }
+               
       	    	
-      	    }
+      	    
 
 
       	    function Stop()
