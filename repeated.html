@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Repeated</title>
+</head>
+<body>
+ <!-- anno --> 
+ <!-- <h1>"My name "</h1> -->
+
+      <h1 id="one">0</h1>
+
+      <button onclick="StartData()">Start</button>
+      <button onclick="Closedata()">close</button>
+
+    <script>
+        let id;
+        function StartData()
+        {
+           
+          id = setInterval(function(){
+                var b = document.getElementById("one").innerHTML;
+
+                b =parseInt(b) +5;
+
+                document.getElementById("one").innerHTML =b;
+
+            }, 200)
+            
+
+}
+
+function Closedata()
+{
+      clearInterval(id)
+}
+
+    </script>
+
+</body>
+</html>
