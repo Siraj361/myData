@@ -16,6 +16,28 @@ const { getOrgFromAPI } = require('../services/orgService');
 const { generateTokens } = require("../utils/generateTokenUtil.js");
 const { sendEmail } = require("../utils/sendEmailUtil.js");
 
+
+async function generatePermissionId() {
+  try {
+    // Find the highest existing permissionId in the database
+    const lastPermission = await Permission.findOne({
+      order: [['permissionId', 'DESC']], // Order by permissionId in descending order
+      attributes: ['permissionId'] // Only select permissionId
+    });
+
+    // If there is no record, return 1 (first ID)
+    if (!lastPermission) {
+      return 1;
+    }
+
+    // Otherwise, increment the last permissionId by 1
+    return lastPermission.permissionId + 1;
+  } catch (error) {
+    console.error('Error generating permissionId:', error);
+    throw new Error('Error generating permissionId');
+  }
+}
+
 // OTP Generator
 const generateOTP = async (email) => {
   try {

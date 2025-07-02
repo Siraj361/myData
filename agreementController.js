@@ -4,28 +4,131 @@ const Agreement = db.Agreement;
 const axios = require('axios');
 const { getValitiveToken } = require('../services/valitiveAuthService');
 
+
+
+const Receipt = db.Receipt; // Assuming you have a Receipt model defined in your models directory
+
+// or your correct path
+
 const createAgreement = asyncHandler(async (req, res) => {
   try {
-    const agreement = await Agreement.create(req.body);
-    if (!agreement) {
+    const {
+      registrationNumber,
+      purchaseDate,
+      email,
+      phone,
+      purchasePrice,
+      paymentMethod,
+      vatType,
+      creditMarking,
+      mileage,
+      latestService,
+      numberOfKeys,
+      deck,
+      notes,
+      creditor,
+      depositor,
+      creditAmount,
+      name,
+      customerType,
+      address,
+      birthDate,
+      gender,
+      salesDate,
+      commissionRate,
+      commissionAmount,
+      agencyFee,
+      insurer,
+      insurerType,
+      warrantyProvider,
+      warrantyProduct,
+      socialSecurityNumber,
+      organizationNumber,
+      tradeInType,
+      tradeInRegistrationNumber,
+      tradeInPurchaseDate,
+      tradeInPurchasePrice,
+      tradeInMileage,
+      tradeInCreditMaking
+    } = req.body;
+
+    // Check duplicate registrationNumber
+    const existing = await Agreement.findOne({ where: { registrationNumber } });
+    if (existing) {
       return res.status(400).json({
         success: false,
-        message: 'Agreement creation failed',
+        message: 'Agreement with this registration number already exists',
       });
     }
+
+    // Create agreement
+    const agreement = await Agreement.create({
+      registrationNumber,
+      purchaseDate,
+      email,
+      phone,
+      purchasePrice,
+      paymentMethod,
+      vatType,
+      creditMarking,
+      mileage,
+      latestService,
+      numberOfKeys,
+      deck,
+      notes,
+      creditor,
+      depositor,
+      creditAmount,
+      name,
+      customerType,
+      address,
+      birthDate,
+      gender,
+      salesDate,
+      commissionRate,
+      commissionAmount,
+      agencyFee,
+      insurer,
+      insurerType,
+      warrantyProvider,
+      warrantyProduct,
+      socialSecurityNumber,
+      organizationNumber,
+      tradeInType,
+      tradeInRegistrationNumber,
+      tradeInPurchaseDate,
+      tradeInPurchasePrice,
+      tradeInMileage,
+      tradeInCreditMaking
+    });
+
+    // Create receipt
+    const receipt = await Receipt.create({
+      receiptID: `RCPT-${Date.now()}`, // unique ID
+      agreementID: agreement.id,        // FK from agreement
+      amount: parseFloat(purchasePrice),
+      date: new Date()
+    });
+
     res.status(201).json({
       success: true,
-      message: 'Agreement created',
-      data: agreement,
+      message: 'Agreement and receipt created successfully',
+      data: {
+        agreement,
+        receipt
+      }
     });
+
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Error creating agreement',
+      message: 'Error creating agreement and receipt',
       error: error.message,
     });
   }
 });
+
+
 
 const getAllAgreements = asyncHandler(async (req, res) => {
   try {
@@ -73,12 +176,93 @@ const updateAgreement = asyncHandler(async (req, res) => {
         message: 'Agreement not found',
       });
     }
-    await agreement.update(req.body);
+
+    const {
+      registrationNumber,
+      purchaseDate,
+      email,
+      phone,
+      purchasePrice,
+      paymentMethod,
+      vatType,
+      creditMarking,
+      mileage,
+      latestService,
+      numberOfKeys,
+      deck,
+      notes,
+      creditor,
+      depositor,
+      creditAmount,
+      name,
+      customerType,
+      address,
+      birthDate,
+      gender,
+      salesDate,
+      commissionRate,
+      commissionAmount,
+      agencyFee,
+      insurer,
+      insurerType,
+      warrantyProvider,
+      warrantyProduct,
+      socialSecurityNumber,
+      organizationNumber,
+      tradeInType,
+      tradeInRegistrationNumber,
+      tradeInPurchaseDate,
+      tradeInPurchasePrice,
+      tradeInMileage,
+      tradeInCreditMaking
+    } = req.body;
+
+    await agreement.update({
+      registrationNumber,
+      purchaseDate,
+      email,
+      phone,
+      purchasePrice,
+      paymentMethod,
+      vatType,
+      creditMarking,
+      mileage,
+      latestService,
+      numberOfKeys,
+      deck,
+      notes,
+      creditor,
+      depositor,
+      creditAmount,
+      name,
+      customerType,
+      address,
+      birthDate,
+      gender,
+      salesDate,
+      commissionRate,
+      commissionAmount,
+      agencyFee,
+      insurer,
+      insurerType,
+      warrantyProvider,
+      warrantyProduct,
+      socialSecurityNumber,
+      organizationNumber,
+      tradeInType,
+      tradeInRegistrationNumber,
+      tradeInPurchaseDate,
+      tradeInPurchasePrice,
+      tradeInMileage,
+      tradeInCreditMaking
+    });
+
     res.status(200).json({
       success: true,
-      message: 'Agreement updated',
+      message: 'Agreement updated successfully',
       data: agreement,
     });
+
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -87,6 +271,7 @@ const updateAgreement = asyncHandler(async (req, res) => {
     });
   }
 });
+
 const deleteAgreement = asyncHandler(async (req, res) => {
   try {
     const agreement = await Agreement.findByPk(req.params.id);
