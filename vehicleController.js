@@ -3,94 +3,31 @@ const { Op } = require('sequelize');
 const asyncHandler = require('express-async-handler');
 const Vehicle = db.Vehicle;
 
-
-const { writeGenFile } = require('../services/genHelper.js');
-const { uploadFileSftp } = require('../services/sftpupload.js');
-
-
-
 const createVehicle = asyncHandler(async (req, res) => {
   try {
-    const {
-      registrationNumber, model, vehicleName, year,
-      category, status, importOrigin, registrationDate,
-      price, mileage, daysInStock, fuelType, gearbox, drive,
-      color, horsepower, notes, outlay, equipment, documents,
-      type, chassisNumber, preRegistrationDate, registrationRenewed,
-      statusDate, engineVolume, maxSpeed, serviceWeight, totalWeight,
-      vehicleWeight, passengers, variant, version, typeCode, ecoCertificate,
-      currentOwner, acquisitionDate, totalOwners, organizationOwner,
-      lastInspection, nextInspectionDue, inspectionMileage, inspectionStation,
-      importID, directImport
-    } = req.body;
+    const { vehicleName, documents, notes, outlay } = req.body;
 
-    const existing = await Vehicle.findOne({ where: { registrationNumber } });
-if (existing) {
-  return res.status(400).json({
-    success: false,
-    message: 'Vehicle with this registration number already exists'
-  });
-}
-
+    const formattedDocuments = Array.isArray(documents) ? documents : [];
+    const formattedNotes = Array.isArray(notes) ? notes : [];
+    const formattedOutlay = Array.isArray(outlay) ? outlay : [];
 
     const vehicle = await Vehicle.create({
-      registrationNumber,
-      model,
+      ...req.body,
+      documents: formattedDocuments,
+      notes: formattedNotes,
+      outlay: formattedOutlay,
       vehicleName: vehicleName || 'Volvo V50',
-      year,
-      category,
-      status,
-      importOrigin,
-      registrationDate,
-      price,
-      mileage,
-      daysInStock,
-      fuelType,
-      gearbox,
-      drive,
-      color,
-      horsepower,
-      notes: Array.isArray(notes) ? notes : [],
-      outlay: Array.isArray(outlay) ? outlay : [],
-      equipment,
-      documents: Array.isArray(documents) ? documents : [],
-      type,
-      chassisNumber,
-      preRegistrationDate,
-      registrationRenewed,
-      statusDate,
-      engineVolume,
-      maxSpeed,
-      serviceWeight,
-      totalWeight,
-      vehicleWeight,
-      passengers,
-      variant,
-      version,
-      typeCode,
-      ecoCertificate,
-      currentOwner,
-      acquisitionDate,
-      totalOwners,
-      organizationOwner,
-      lastInspection,
-      nextInspectionDue,
-      inspectionMileage,
-      inspectionStation,
-      importID,
-      directImport,
     });
 
     res.status(201).json({
       success: true,
-      message: 'Vehicle created successfully',
+      message: 'Vehicle created',
       data: vehicle,
     });
   } catch (error) {
-    console.error('❌ Error creating vehicle:', error);
     res.status(500).json({
       success: false,
-      message: 'Failed to create vehicle',
+      message: 'Error creating vehicle',
       error: error.message,
     });
   }
@@ -208,20 +145,6 @@ const filterVehicles = asyncHandler(async (req, res) => {
   res.status(200).json({ success: true, data: vehicles });
 });
 
-const exportInventory = asyncHandler(async (req, res) => {
-  const dealerName = req.user.dealerName;
-  const vehicles = await Vehicle.findAll({ where: { dealerId: req.user.id } });
-
-  if (vehicles.length === 0) {
-    return res.status(400).json({ message: 'No vehicles to export' });
-  }
-
-  const fileName = await writeGenFile(vehicles, dealerName);
-  await uploadFileSftp(fileName, `/${fileName}`);
-  return res.json({ success: true, message: 'Inventory exported and uploaded', fileName });
-});
-
-
 module.exports = {
   createVehicle,
   getAllVehicles,
@@ -230,5 +153,4 @@ module.exports = {
   deleteVehicle,
   countAllVehicles,
   filterVehicles,
-  exportInventory
 };

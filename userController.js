@@ -431,40 +431,6 @@ const changeUserPassword = async (req, res) => {
     });
   }
 };
-const getRecentUsers = async (req, res) => {
-  try {
-    // Get recent users with last login and status
-    const recentUsers = await User.findAll({
-      attributes: [
-        'id', 'first', 'last', 'email', 'roleId', 'active', 'last_Login', // Select the fields you need
-        [db.sequelize.fn('DATE_FORMAT', db.sequelize.col('last_Login'), '%m/%d/%y'), 'last_Login'] // Format the date
-      ],
-      order: [
-        ['last_Login', 'DESC']
-      ],
-      limit: 5 // Limit to recent 5 users, adjust as needed
-    });
-
-    
-    const usersWithRoles = await Promise.all(recentUsers.map(async user => {
-      const role = await Role.findByPk(user.roleId); // Assuming Role model exists
-      return {
-        ...user.toJSON(),
-        role: role ? role.name : 'N/A' // Assuming role has a `name` field
-      };
-    }));
-
-    // Respond with formatted data
-    return res.status(200).json({
-      success: true,
-      message: "Recent users fetched successfully",
-      data: usersWithRoles
-    });
-  } catch (error) {
-    console.error("Error fetching recent users:", error);
-    return res.status(500).json({ success: false, message: "Error fetching recent users", error: error.message });
-  }
-};
 
 module.exports = {
     getAllUsers,
@@ -472,6 +438,5 @@ module.exports = {
     createUser,
     updateUser,
     deleteUser,
-    changeUserPassword,
-    getRecentUsers
+    changeUserPassword
 }

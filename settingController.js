@@ -52,6 +52,7 @@ const getTheme = (async (req, res) => {
         });
     }
 });
+
 const updateTheme = (async (req, res) => {
     try {
         const { corp_id, type } = req.user;
@@ -114,6 +115,7 @@ const updateTheme = (async (req, res) => {
         });
     }
 });
+
 const getLogo =(async (req, res) => {
     try {
         const { corp_id } = req.user;
@@ -162,6 +164,7 @@ const getLogo =(async (req, res) => {
         });
     }
 });
+
 const updateLogo = (async (req, res) => {
     try {
         const { corp_id, type } = req.user;
